@@ -43,7 +43,12 @@ def data_processor():
     # print(' ')
     df['threat_type'] = df['threat_type'].str.replace('.', '', regex=True)
     # df = df.drop_duplicates()
-
+    
+    #drop the columns whose total count is less than 20
+    indexNames = df[(df['threat_type'] == 'spy') | (df['threat_type'] == 'perl') | (df['threat_type'] == 'phf') 
+                | (df['threat_type'] == 'multihop') | (df['threat_type'] == 'ftp_write') | (df['threat_type'] == 'loadmodule') 
+                | (df['threat_type'] == 'rootkit') | (df['threat_type'] == 'imap')].index
+    df.drop(indexNames , inplace=True)
 
     # 34 numerical columns are considered for training
     num_df = df[num_col]
@@ -73,13 +78,15 @@ def data_processor():
 
     # print(y_test)
     print(len(np.unique(y_train)), len(np.unique(y_test)))
-    unique, counts = np.unique(y_train, return_counts=True)
-    unique1, counts1 = np.unique(y_test, return_counts=True)
+    # unique, counts = np.unique(y_train, return_counts=True)
+    # unique1, counts1 = np.unique(y_test, return_counts=True)
 
-    print(np.array(np.unique(y_train, return_counts=True)).T)
-    print(np.array(np.unique(y_test, return_counts=True)).T)
+    # print(np.array(np.unique(y_train, return_counts=True)).T)
+    # print(np.array(np.unique(y_test, return_counts=True)).T)
+
     # print(np.shape(X_train), np.shape(X_test), np.shape(y_train), np.shape(y_test))
     # print(np.unique(y_test), np.unique(y_train))
+
     return X_train, X_test, y_train, y_test
 
 
