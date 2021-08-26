@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd # use version==1.2.5 incase you want to run pandas profiling
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 
 data_path = "data/kddcup_data"
@@ -41,7 +42,7 @@ def data_processor():
     # do some preprocessing
     # print(' ')
     df['threat_type'] = df['threat_type'].str.replace('.', '', regex=True)
-    df = df.drop_duplicates()
+    # df = df.drop_duplicates()
 
 
     # 34 numerical columns are considered for training
@@ -57,6 +58,7 @@ def data_processor():
     # labelencode the target variable
     threat_types = df["threat_type"].values
     encoder = LabelEncoder()
+    # encoder = OneHotEncoder()
     # use LabelEncoder to encode the threat types in numeric values
     y = encoder.fit_transform(threat_types)
     # print(' ')
@@ -69,8 +71,15 @@ def data_processor():
     X_train = a.transform(X_train)
     X_test = scaler.transform(X_test)
 
-    print(y_test)
-    print(np.unique(y_test))
+    # print(y_test)
+    print(len(np.unique(y_train)), len(np.unique(y_test)))
+    unique, counts = np.unique(y_train, return_counts=True)
+    unique1, counts1 = np.unique(y_test, return_counts=True)
+
+    print(np.array(np.unique(y_train, return_counts=True)).T)
+    print(np.array(np.unique(y_test, return_counts=True)).T)
+    # print(np.shape(X_train), np.shape(X_test), np.shape(y_train), np.shape(y_test))
+    # print(np.unique(y_test), np.unique(y_train))
     return X_train, X_test, y_train, y_test
 
 
