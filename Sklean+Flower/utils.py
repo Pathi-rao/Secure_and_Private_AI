@@ -40,9 +40,9 @@ def set_initial_params(model: LogisticRegression):
     """
     Sets initial parameters as zeros
     """
-    n_classes = 23 # threat types
+    n_classes = 15 # threat types
     n_features = 33 # Number of features in dataset
-    model.classes_ = np.array([i for i in range(23)])
+    model.classes_ = np.array([i for i in range(15)])
 
     model.coef_ = np.zeros((n_classes, n_features))
     if model.fit_intercept:

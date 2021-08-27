@@ -77,7 +77,7 @@ def data_processor():
     X_test = scaler.transform(X_test)
 
     # print(y_test)
-    print(len(np.unique(y_train)), len(np.unique(y_test)))
+    # print(len(np.unique(y_train)), len(np.unique(y_test)))
     # unique, counts = np.unique(y_train, return_counts=True)
     # unique1, counts1 = np.unique(y_test, return_counts=True)
 
