@@ -26,8 +26,8 @@ def get_eval_fn(model: LogisticRegression):
         # Update model with the latest parameters
         utils.set_model_params(model, parameters)
         pred_proba = model.predict_proba(X_test)
-        print(len(pred_proba))
-        print(len(np.unique(y_test)))
+        # print(len(pred_proba))
+        # print(len(np.unique(y_test)))
         loss = log_loss(y_test, pred_proba)
         accuracy = model.score(X_test, y_test)
         return loss, {"accuracy": accuracy}
