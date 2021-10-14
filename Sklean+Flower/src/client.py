@@ -88,7 +88,7 @@ class KDDClient(fl.client.NumPyClient):
         accuracy = model.score(X_test, y_test)
         return loss, len(X_test), {"accuracy": accuracy}
 
-    def disconnect (self):
-        fl.common.typing.Disconnect('disconnecting...')
+    # def disconnect (self):
+    #     fl.common.typing.Disconnect('disconnecting...')
 
 fl.client.start_numpy_client("localhost:8080", client=KDDClient())
